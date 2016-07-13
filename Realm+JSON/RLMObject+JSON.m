@@ -190,6 +190,10 @@ static NSInteger const kCreateBatchSize = 100;
 				}
 			}
 			else if ([propertyClass isSubclassOfClass:[RLMArray class]]) {
+				if (!value || [value isEqual:[NSNull null]]) {
+					continue;
+				}
+				
 				RLMProperty *property = [self mc_propertyForPropertyKey:objectKeyPath];
 				Class elementClass = [RLMSchema classForString: property.objectClassName];
 
